@@ -1,9 +1,23 @@
 
 // Fonts
 @import url(https://fonts.googleapis.com/css?family=Raleway:300,400,600);
+@import 'fonts';
 
-// Variables
-@import "variables";
+body {
+  font-family: "Musea Sans Rounded";
+}
 
-// Bootstrap
-@import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
+.padding-top-10 {
+  padding-top:10px;
+}
+.padding-top-20 {
+  padding-top:20px;
+}
+
+.logo {
+  margin: 50px 0 50px 0;
+}
+
+.form-group {
+  margin-bottom:10px;
+}

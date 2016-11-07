@@ -1,87 +1,36 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+@extends('layout.master')
 
-    <title>Laravel</title>
+@section('content')
+    <div class="row">
+        <div class="col-md-12">
+            <form action="{{route('ringDoorbell')}}" method="POST">
+                <input type="hidden" name="_token" value="{{csrf_token()}}">
+                <div class="row padding-top-10">
+                    <div class="form-group">
+                        <label for="name" class="col-md-3">{{ucfirst(trans('general.your name'))}}</label>
 
-    <!-- Fonts -->
-    <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
+                        <div class="col-md-9">
+                            <input type="text" name="name" class="form-control" placeholder="Jan Janssen">
+                        </div>
+                    </div>
+                </div>
 
-    <!-- Styles -->
-    <style>
-        html, body {
-            background-color: #fff;
-            color: #636b6f;
-            font-family: 'Raleway', sans-serif;
-            font-weight: 100;
-            height: 100vh;
-            margin: 0;
-        }
+                <div class="row padding-top-10">
+                    <div class="form-group">
+                        <label for="name" class="col-md-3">{{ucfirst(trans('general.take picture'))}}</label>
 
-        .full-height {
-            height: 100vh;
-        }
+                        <div class="col-md-9">
+                            <input type="file" name="picture" class="form-control">
+                        </div>
+                    </div>
+                </div>
 
-        .flex-center {
-            align-items: center;
-            display: flex;
-            justify-content: center;
-        }
-
-        .position-ref {
-            position: relative;
-        }
-
-        .top-right {
-            position: absolute;
-            right: 10px;
-            top: 18px;
-        }
-
-        .content {
-            text-align: center;
-        }
-
-        .title {
-            font-size: 84px;
-        }
-
-        .links > a {
-            color: #636b6f;
-            padding: 0 25px;
-            font-size: 12px;
-            font-weight: 600;
-            letter-spacing: .1rem;
-            text-decoration: none;
-            text-transform: uppercase;
-        }
-
-        .m-b-md {
-            margin-bottom: 30px;
-        }
-    </style>
-</head>
-<body>
-<div class="flex-center position-ref full-height">
-    @if (Route::has('login'))
-        <div class="top-right links">
-            <a href="{{ url('/login') }}">Login</a>
-            <a href="{{ url('/register') }}">Register</a>
+                <div class="row padding-top-20">
+                    <div class="col-md-4 pull-right">
+                        <button type="submit" class="btn btn-success pull-right">{{ucfirst(trans('general.send'))}}</button>
+                    </div>
+                </div>
+            </form>
         </div>
-    @endif
-
-    <div class="content">
-        <form action="{{route('ringDoorbell')}}" method="POST">
-            <input type="hidden" name="_token" value="{{csrf_token()}}">
-
-            <input type="text" name="name" class="form-control" placeholder="Jan Janssen">
-
-            <input type="submit" class="btn btn-success" value="Verstuur">
-        </form>
     </div>
-</div>
-</body>
-</html>
+@endsection

@@ -11,12 +11,11 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::group(['middleware' => 'locale'], function () {
+    Route::get('', 'DoorbellController@index')->name('index');
 
-Route::get('/ring', function () {
-    return View::make('ringForm');
-});
+    Route::get('/ring', 'DoorbellController@ringForm')->name('ringform');
+    Route::get('/setLocale/{lang}', "DoorbellController@changeLocale")->name('setLocale');
 
-Route::post('/ring', "DoorbellController@ringRing")->name('ringDoorbell');
+    Route::post('/ring', "DoorbellController@ringRing")->name('ringDoorbell');
+});
