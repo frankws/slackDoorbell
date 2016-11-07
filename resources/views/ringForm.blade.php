@@ -3,7 +3,7 @@
 @section('content')
     <div class="row">
         <div class="col-md-12">
-            <form action="{{route('ringDoorbell')}}" method="POST">
+            <form action="{{route('ringDoorbell')}}" method="POST" enctype="multipart/form-data">
                 <input type="hidden" name="_token" value="{{csrf_token()}}">
                 <div class="row padding-top-10">
                     <div class="form-group">

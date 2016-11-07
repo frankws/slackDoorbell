@@ -13,14 +13,16 @@ class RingRing extends Notification
 {
     use Queueable;
 
+    private $picture;
+
     /**
      * Create a new notification instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($picture)
     {
-
+        $this->picture = $picture;
     }
 
     
@@ -59,10 +61,18 @@ class RingRing extends Notification
      */
     public function toSlack($notifiable)
     {
+        $url = env('APP_URL') . "/" . $this->picture;
+
         return (new SlackMessage)
             ->success()
             ->from('Doorbell', ':bell:')
-            ->content('Ring ring, '.Request::get('name').' at the door!');
+            ->content('Ring ring, ' . Request::get('name').' staat bij de deur!')
+            ->attachment(function ($attachment) use ($url) {
+                $attachment->title(Request::get('name'), $url)
+                    ->content([
+                        'image_url' => $url
+                    ]);
+            });
     }
 
     /**

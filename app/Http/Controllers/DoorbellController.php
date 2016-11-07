@@ -15,6 +15,7 @@ use View;
 use Request;
 use Session;
 use App;
+use Storage;
 
 /**
  * Class DoorbellController
@@ -22,13 +23,18 @@ use App;
  */
 class DoorbellController
 {
+    /**
+     * @author Frank Wichers Schreur <f.wichers@texemus.com>
+     *
+     * @param $lang
+     * @return mixed
+     *
+     */
     public function changeLocale($lang)
     {
         App::setLocale($lang);
-
         Session::set('locale', $lang);
 
-//        dd(Session::get('locale'));
         return Redirect::back();
     }
 
@@ -43,15 +49,33 @@ class DoorbellController
         return View::make('home');
     }
 
+    /**
+     * @author Frank Wichers Schreur <f.wichers@texemus.com>
+     *
+     * @return View
+     *
+     */
     public function ringForm()
     {
         return View::make('ringForm');
     }
 
+    /**
+     * @author Frank Wichers Schreur <f.wichers@texemus.com>
+     *
+     * @return View
+     *
+     */
     public function ringRing()
     {
+        if (Request::hasFile('picture')) {
+            if (Request::file('picture')->isValid()) {
+                $pic = Request::file('picture')->store('visitors');
+            }
+        }
+
         $user = new User();
-        $user->notify(new RingRing());
+        $user->notify(new RingRing($pic));
 
         return View::make('home')->withMessage('Hallo '. Request::get('name') . ', er komt iemand naar de deur');
     }
