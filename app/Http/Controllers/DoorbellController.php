@@ -70,7 +70,7 @@ class DoorbellController
     {
         if (Request::hasFile('picture')) {
             if (Request::file('picture')->isValid()) {
-                $pic = Request::file('picture')->store('visitors');
+                $pic = Request::file('picture')->store('public/visitors');
             }
         }
 
